@@ -7,8 +7,17 @@ package juegozombie;
 
 /**
  *
- * @author Usuario
+ * @author Jhonny Picado
  */
-public class Saitama {
+public class Saitama extends Jugador{
+    
+    Saitama(){
+        super();
+        this.nombre = "Saitama";
+        this.tipo = "Super heroe";
+    }
+    
+    
+    
     
 }

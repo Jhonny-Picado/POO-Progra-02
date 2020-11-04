@@ -6,9 +6,16 @@
 package juegozombie;
 
 /**
- *
- * @author Usuario
+ * @author Jhonny Picado
+ * Clase del jugador Sogeking
  */
-public class Sogeking {
+public class Sogeking extends Jugador{
+    
+    //Constructor de la clase
+    Sogeking(){
+        super();
+        this.nombre="Sogeking";
+        this.tipo ="Dios";
+    }  
     
 }

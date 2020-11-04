@@ -9,6 +9,12 @@ package juegozombie;
  *
  * @author Usuario
  */
-public class Tanjiro {
+public class Tanjiro extends Jugador{
     
+    
+    Tanjiro(){
+        super();
+        this.nombre="Tanjiro";
+        this.tipo = "Espadachín";
+    }
 }
