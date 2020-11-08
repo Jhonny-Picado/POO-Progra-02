@@ -9,5 +9,17 @@ package juegozombie;
  *
  * @author Usuario
  */
-
+public class Arma extends Items{
+    private final String nombresM[]={"UnoAUno", "corto alcance" , "largo alcance"};
+    private final String categorias[]={"Oro","Plata","Bronce"};
     
+    Arma(){
+    
+    
+    }
+        
+    
+    
+    }
+    
+
