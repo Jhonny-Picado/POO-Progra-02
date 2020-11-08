@@ -15,6 +15,7 @@ public class Enemigo extends Personaje{
     protected int vision;
     protected int sonido;
     protected String tipo;
+    protected int vida;
     
     //Constructor
     Enemigo(){        
@@ -26,6 +27,7 @@ public class Enemigo extends Personaje{
     //Para subir la vision en el tablero
     public void AumentarVision(){
         this.vision+=1;
+        
     }
     
     
@@ -44,5 +46,22 @@ public class Enemigo extends Personaje{
     public void set(int valor){
         this.sonido+=valor;
     }
+    public void Atacar(){
+        if (this.vision<=3);
+        
+    }
+    public void escuchar(){
+    
+    
+    }
+    public void dejarItem(){
+        
+    
+    
+    }
+    
+    
+    
+    
 }
 

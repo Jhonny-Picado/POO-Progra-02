@@ -9,6 +9,5 @@ package juegozombie;
  *
  * @author Usuario
  */
-public class Arma {
+
     
-}

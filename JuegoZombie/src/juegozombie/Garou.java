@@ -9,6 +9,16 @@ package juegozombie;
  *
  * @author Usuario
  */
-public class Garou {
+public class Garou extends Enemigo{
+    Garou(){
+        this.nombre=" Garou";
+        this.tipo=" plebeyo";
+        this.vision=2;
+        this.vida*=1.5;
     
+    }
+        public void acompanante(){
+    }
 }
+
+

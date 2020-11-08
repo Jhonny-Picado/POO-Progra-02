@@ -9,6 +9,14 @@ package juegozombie;
  *
  * @author Usuario
  */
-public class AllForOne {
+public class AllForOne extends Enemigo  {
+    AllForOne(){
+        this.nombre=" AllForOne";
+        this.tipo="Inmortal";
+        this.vision=3;
+        this.vida*=3.5;
+    
+    }
+    
     
 }
