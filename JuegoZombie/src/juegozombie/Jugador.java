@@ -15,6 +15,7 @@ public class Jugador extends Personaje{
     protected int nivel;
     protected int experiencia;
     protected String tipo;
+    //protected int posicion;
     
     //Constructor
     Jugador(){        
