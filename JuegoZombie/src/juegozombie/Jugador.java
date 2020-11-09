@@ -18,7 +18,7 @@ public class Jugador extends Personaje{
     //protected int posicion;
     
     //Constructor
-    Jugador(){        
+    public Jugador(){        
         super();
         this.nivel=1;
         this.experiencia=0;
@@ -44,5 +44,17 @@ public class Jugador extends Personaje{
     //Metodo utilizado para modificar la experiencia del jugador
     public void setExperiencia(int valor){
         this.experiencia+=valor;
+    }
+    
+    public String getEspecialidad(){
+        return this.tipo;
+    }
+    
+    public int getNivel(){
+        return this.nivel;
+    }
+    
+    public int getExperiencia(){
+        return this.experiencia;
     }
 }

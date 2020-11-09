@@ -12,7 +12,7 @@ package juegozombie;
 public class Tanjiro extends Jugador{
     
     
-    Tanjiro(){
+    public Tanjiro(){
         super();
         this.nombre="Tanjiro";
         this.tipo = "Espadachín";

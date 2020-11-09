@@ -11,7 +11,7 @@ package juegozombie;
  */
 public class Saitama extends Jugador{
     
-    Saitama(){
+    public Saitama(){
         super();
         this.nombre = "Saitama";
         this.tipo = "Super heroe";

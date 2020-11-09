@@ -12,7 +12,7 @@ package juegozombie;
 public class Sogeking extends Jugador{
     
     //Constructor de la clase
-    Sogeking(){
+    public Sogeking(){
         super();
         this.nombre="Sogeking";
         this.tipo ="Dios";

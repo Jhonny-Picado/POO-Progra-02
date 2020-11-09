@@ -17,7 +17,7 @@ public class Items {
     protected int contador=0;
     
     //Constructor por defecto
-    Items(){
+    public Items(){
     }
     
     //Metodo utilizado para usar el item 

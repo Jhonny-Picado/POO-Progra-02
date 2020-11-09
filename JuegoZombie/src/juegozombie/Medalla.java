@@ -17,7 +17,7 @@ public class Medalla extends Items{
     private final  String categoria;
     
     //Constructor de la clase
-    Medalla(){
+    public Medalla(){
         super();
         this.nombre= nombresM[(int) (Math.random()*9+ 0)];
         this.categoria=categorias[(int) (Math.random()*2+0)];

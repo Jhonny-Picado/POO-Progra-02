@@ -13,7 +13,7 @@ public class JuegoZombie {
 
     /**
      * @param args the command line arguments
-     */
+     *//*
     public static void main(String[] args) {
         // TODO code application logic here
     
@@ -55,6 +55,5 @@ public class JuegoZombie {
         
         sai.AgregarItem(cejas);
         System.out.println("\n"+"\n"+sai.articulos.get(0).poder + "   "+ sai.articulos.get(0).nombre);
-        
-    }
+        */
 }

@@ -18,15 +18,17 @@ public class Personaje {
     protected int vida;
     protected int ataque;
     protected int defensa;
+    protected int [] posicion;
     protected boolean muerto;
     protected String nombre;
     List<Items> articulos = new ArrayList<>();
-    
+
     //Constructor de la clase
-    Personaje(){
+    public Personaje(){
         this.vida=100;
         this.defensa=100;
         this.muerto=false;
+        this.posicion=new int[2];
     }
     
     
@@ -67,4 +69,22 @@ public class Personaje {
     public void AgregarItem(Items item){
         this.articulos.add(item);
     }
+    
+    public String getNombre(){
+        return this.nombre;
+    }
+    
+    public int getVida(){
+        return this.vida;
+    }
+    
+    public void setPosicion(int fila,int columna){
+        this.posicion[0]=fila;
+        this.posicion[1]=columna;
+    }
+    
+    public int [] getPosicion(){
+        return this.posicion;
+    }
+    
 }
