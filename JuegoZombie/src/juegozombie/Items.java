@@ -14,7 +14,7 @@ public class Items {
     //Atributos de la clase
     protected String nombre;
     protected int poder;
-    protected int contador=0;
+    protected String tipo;
     
     //Constructor por defecto
     public Items(){
@@ -24,5 +24,19 @@ public class Items {
     public int UsarItem(){
         return this.poder;
     }
+    
+    public String getNombre(){
+        return this.nombre;
+    }
+    
+    
+    public String getTipo(){
+        return this.tipo;
+    }
+    
+    public int getPoder(){
+        return this.poder;
+    }
+    
     
 }

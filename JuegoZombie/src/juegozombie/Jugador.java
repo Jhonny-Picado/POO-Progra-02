@@ -30,13 +30,26 @@ public class Jugador extends Personaje{
     }
     
     
-    /*
+    
     //Metodo utilizado para usar un item
-    public int UsarItem(int posicion){
+    public void UsarItem(int index){
         
-       return items.get(posicion);
+        Items item=articulos.get(index);
+        
+        if ("Consumible".equals(item.getTipo()))
+            setVida(item.getPoder());
+        
+        else if ("Medalla".equals(item.getTipo()))
+            setExperiencia(item.getPoder());
+        
+        else
+            setDefensa(item.getPoder());
+            
+        this.articulos.remove(index);
     }
     
+    
+    /*
     public int UsarHabilidad(){
         return
     }*/

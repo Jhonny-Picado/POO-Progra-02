@@ -16,5 +16,6 @@ public class Tanjiro extends Jugador{
         super();
         this.nombre="Tanjiro";
         this.tipo = "Espadachín";
+        iniciarItems();     //Metodo que le añade algunos items en su inicializacion
     }
 }

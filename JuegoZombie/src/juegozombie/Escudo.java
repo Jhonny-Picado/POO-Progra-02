@@ -22,6 +22,7 @@ public class Escudo extends Items {
         this.nombre= nombresE[(int) (Math.random()*9+ 0)];
         this.material=materiales[(int) (Math.random()*3+0)];
         this.poder= (int)(Math.random()*12+5); 
+        this.tipo="Escudo";
     }
  
     public String getMaterial(){

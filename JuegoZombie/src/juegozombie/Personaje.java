@@ -46,15 +46,19 @@ public class Personaje {
     
     //Metodo para modificar el atributo booleano de muerto
     //se valida despues y se usan otros metodos en el mapa
-    public void Matar(){
-        if (vida<1){
+    public void Muerto(){
+        if (vida==0){
             this.muerto=true;
         }
     }
     
     //Metodo a usar para incrementar la vida, ya sea por una habilidad o un item
-    public void IncrementarVida(int incremento){
-        vida+=incremento;
+    public void setVida(int incremento){
+        if (vida<100){
+            vida+=incremento;
+            if (vida<0)
+                vida=0;
+        }
     }
 
     public void setDefensa(int valor){
@@ -87,4 +91,19 @@ public class Personaje {
         return this.posicion;
     }
     
+    public List<Items> getItems(){
+        return this.articulos;
+    }
+    
+    
+    //Metodo protegido que inicia los items de los jugadores
+    protected void iniciarItems(){
+        
+        for (int i=0; i<2; i++){
+        Consumible con =new Consumible();
+        this.articulos.add(con);
+        }
+       Medalla med = new Medalla();
+       this.articulos.add(med);
+    }
 }

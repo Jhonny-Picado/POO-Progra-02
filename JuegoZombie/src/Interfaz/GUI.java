@@ -133,6 +133,7 @@ public class GUI extends javax.swing.JFrame {
         bItems1.setBackground(new java.awt.Color(102, 0, 0));
         bItems1.setForeground(new java.awt.Color(255, 255, 255));
         bItems1.setText("Items");
+        bItems1.setActionCommand("Items Tanjiro");
         bItems1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bItems1ActionPerformed(evt);
@@ -382,10 +383,11 @@ public class GUI extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                         .addComponent(bItems2)
                         .addGap(23, 23, 23)))
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bMoverS)
-                    .addComponent(jButton2)
-                    .addComponent(bAtacarS, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(bAtacarS, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(bMoverS)
+                        .addComponent(jButton2)))
                 .addGap(18, 18, 18))
         );
 
@@ -609,7 +611,7 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_bItems3ActionPerformed
 
     private void bItems1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bItems1ActionPerformed
-        botones.actionPerformed(evt);
+       botones.actionPerformed(evt);
     }//GEN-LAST:event_bItems1ActionPerformed
 
     private void bItems2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bItems2ActionPerformed

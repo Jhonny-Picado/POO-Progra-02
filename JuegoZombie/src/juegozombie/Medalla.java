@@ -22,6 +22,7 @@ public class Medalla extends Items{
         this.nombre= nombresM[(int) (Math.random()*9+ 0)];
         this.categoria=categorias[(int) (Math.random()*2+0)];
         this.poder= (int)(Math.random()*12+5); 
+        this.tipo="Medalla";
     }
  
     public String getCategoria(){

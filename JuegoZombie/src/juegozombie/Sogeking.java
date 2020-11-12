@@ -16,6 +16,7 @@ public class Sogeking extends Jugador{
         super();
         this.nombre="Sogeking";
         this.tipo ="Dios";
+        iniciarItems();
     }  
     
 }
