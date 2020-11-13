@@ -121,7 +121,7 @@ public class ItemsT extends javax.swing.JFrame {
     private void botonitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonitActionPerformed
         Mapa nuevo= new Mapa();
         if (TablaItemsT.getSelectedRow()!= -1)
-            nuevo.UtilizarItem("tanjiro", TablaItemsT.getSelectedRow(),tablaTan);
+           nuevo.UtilizarItem("tanjiro", TablaItemsT.getSelectedRow(),tablaTan);
     }//GEN-LAST:event_botonitActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JTable TablaItemsT;

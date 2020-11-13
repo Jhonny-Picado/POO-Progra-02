@@ -145,7 +145,7 @@ import javax.swing.table.DefaultTableModel;
     public void MoverJugadores(Jugador jugador, Color color){
         if (!jugador.getUsoMover()){
             temporal=jugador.getPosicion();
-            if (ValidarMovida()){
+            if (ValidarMovida(jugador)){
                 Casillas [temporal[0]][temporal[1]].setBackground(Color.blue);
                 Casillas [position[0]][position[1]].setBackground(color);
                 jugador.setPosicion(position[0], position[1]);
@@ -157,11 +157,13 @@ import javax.swing.table.DefaultTableModel;
     }
     
     //Metodo que valida si la posicion a moverse es valida, solo deja mover horizontal y verticalmente y una sola casilla
-    public boolean ValidarMovida(){
+    public boolean ValidarMovida(Jugador jugador){
         
         JButton aux=Casillas[position[0]][position[1]];
         if (aux.getBackground()!= Color.blue)
             return false;
+        else if("Saitama".equals(jugador.getNombre()) && jugador.getHabilidad1())   //Primera habilidad de Saitama moverse libre
+            return true;
         else if (temporal[1]!=0 && Casillas[temporal[0]][temporal[1]-1]==aux){
             return true;
         }
@@ -187,7 +189,23 @@ import javax.swing.table.DefaultTableModel;
         }
     }
     
-
+/*
+    public void AgregarItem(Jugador jugador, DefaultTableModel tabla){
+        Consumible con = new Consumible();
+        if (jugador.getItems().size()<8){    
+            jugador.AgregarItem(con);
+            AñadirRow(con, tabla);
+           }
+        else if("Tanjiro".equals(jugador.getNombre()))
+            tanjiro. MasCapacidad(con);
+        else{
+            JOptionPane.showMessageDialog(vista, "El personaje no tiene la habilidad de poseer más items");
+        }
+    }
+   Agrega items y de una usa la habilidad 1 de tanjiro*/
+    
+    
+    
     //Método encargado de cargar las ventanas inciales de los items de todos los jugadores
     //Funciona con el boton respectivo
     public void MostrarVentanaItems(Jugador jugador){        
@@ -233,7 +251,7 @@ import javax.swing.table.DefaultTableModel;
     //Metodo que se encarga de utilizar un item, valida si el jugador que lo solicita ya uso la opcion
     public void UtilizarItemAux(Jugador jugador, int index, DefaultTableModel tabla){
         if (!jugador.getUsoItem()){
-        jugador.UsarItem(index);
+        jugador.UsarItem(jugador,index);
         jugador.setUsoItem(true);
         tabla.removeRow(index);
         MostrarStats();
@@ -265,6 +283,15 @@ import javax.swing.table.DefaultTableModel;
                 break;
             case "Items Saitama":
                 MostrarVentanaItems(saitama);
+                break;
+            case "Atacar Tanjiro":
+              //  AgregarItem(tanjiro, frameTanjiro.tablaTan);
+                break;
+            case "Atacar Sogeking":
+                //AgregarItem(sogeking, frameSogeking.tablaSog);
+                break;          
+            case "Atacar Saitama":
+               // AgregarItem(saitama, frameSaitama.tablaSai);
                 break;
             default:
                 position=getCoordenadas((JButton) ae.getSource());

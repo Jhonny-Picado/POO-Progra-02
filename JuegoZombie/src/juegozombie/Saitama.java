@@ -18,7 +18,13 @@ public class Saitama extends Jugador{
         iniciarItems(); //Inicializa algunos items al instanciar el juego
     }
     
+    //Metodo de la segunda habilidad de este jugador, le duplica el incremento de experiencia si ya posee la habilidad
+    public int DuplicarExperiencia(int numero){
+        if (this.habilidad2){
+            numero*=2;
+        }
+        return numero;
+    }  
     
-    
-    
+    //La primera habilidad se implemento en el controlador, porque no era necesario hacer un metodo
 }

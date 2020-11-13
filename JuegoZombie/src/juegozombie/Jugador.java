@@ -15,12 +15,12 @@ public class Jugador extends Personaje{
     protected int nivel;
     protected int experiencia;
     protected String tipo;
-    
-    //protected int posicion;
     protected boolean usoItem;
     protected boolean usoMover;
     protected boolean usoAtaque;
-    
+    protected boolean habilidad1;
+    protected boolean habilidad2;
+    protected boolean habilidad3;
     
     //Constructor
     public Jugador(){        
@@ -32,6 +32,8 @@ public class Jugador extends Personaje{
         this.usoItem=false;
         this.usoAtaque=false;
         this.usoMover=false;
+        this.habilidad1=false;
+        this.habilidad2=false;
     }
     
     //Metodo utilizado para subir el nivel del jugador
@@ -41,27 +43,30 @@ public class Jugador extends Personaje{
     
 
     //Metodo utilizado para usar un item
-    public void UsarItem(int index){
+    public void UsarItem(Jugador jugador, int index){
         
         Items item=articulos.get(index);
         
         //Valida que tipo de item es para modificar las stats del personaje
         if ("Consumible".equals(item.getTipo()))
-            setVida(item.getPoder());
+            setVida(jugador,item.getPoder());
         
         else if ("Medalla".equals(item.getTipo()))
-            setExperiencia(item.getPoder());
+            setExperiencia(jugador,item.getPoder());
         
         else if ("Escudo".equals(item.getTipo()))
             setDefensa(item.getPoder());
         
         else
-            setAtaque(item.getPoder());
+            setAtaque(jugador,item);
         this.articulos.remove(index);
     }
     
     //Getters y setter setters de los artibutos de los jugadores
-    public void setExperiencia(int valor){
+    public void setExperiencia(Jugador jugador, int valor){
+        Saitama sait= new Saitama();
+        if ("Saitama".equals(jugador.getNombre()))
+            valor=sait.DuplicarExperiencia(valor);
         this.experiencia+=valor;
     }
     
@@ -105,5 +110,13 @@ public class Jugador extends Personaje{
     
     public boolean AccionesJugador(){   
         return (this.usoItem==true && this.usoAtaque==true && this.usoMover==true);
+    }
+    
+    public void setHabilidad1(){
+        this.habilidad1=true;
+    }
+    
+    public boolean getHabilidad1(){
+        return this.habilidad1;
     }
 }

@@ -18,8 +18,8 @@ public class LargoAlcance extends Arma{
     public LargoAlcance(){
         super();
         this.nombre= nombresA[(int) (Math.random()*9+0)];
-        this.poder= (int)(Math.random()*10+56); 
-        this.ruido= (int)(Math.random()*10+5); 
-        this.tipo="Arma";
+        this.poder= (int)(Math.random()*40+10); 
+        this.ruido= (int)(Math.random()*8+5); 
+        this.tipo="Arma Grande";
     }
 }

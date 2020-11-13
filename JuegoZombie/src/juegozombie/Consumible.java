@@ -15,7 +15,7 @@ public class Consumible extends Items {
     private final String nombresC[]={"Paleta", "Fresquito", "Elixir", "Agua", "Frijoli","Ramen","Tamal","Cafe","Zake","Semillas"};
     
     //COnstructor de la clase
-    Consumible(){
+    public Consumible(){
         super();
         this.nombre= nombresC[(int) (Math.random()*9+ 0)];
         this.poder= (int)(Math.random()*12+5); 

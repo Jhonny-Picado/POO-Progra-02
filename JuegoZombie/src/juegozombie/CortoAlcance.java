@@ -18,8 +18,8 @@ public class CortoAlcance extends Arma{
     public CortoAlcance(){
         super();
         this.nombre= nombresE[(int) (Math.random()*9+0)];
-        this.poder= (int)(Math.random()*50+3); 
-        this.ruido= (int)(Math.random()*4+1); 
-        this.tipo="Arma";
+        this.poder= (int)(Math.random()*15+3); 
+        this.ruido= (int)(Math.random()*3+1); 
+        this.tipo="Arma Corta";
     } 
 }
