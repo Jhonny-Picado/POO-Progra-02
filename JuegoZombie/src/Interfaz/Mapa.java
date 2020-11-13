@@ -18,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
  * Clase que llama la interfaz y tiene los metodos para que las clases se relacionen
  * @author Jhonny Picado Vega
  */
-    public class Mapa implements ActionListener{
+    public final class Mapa implements ActionListener{
    
     //Atibutos a utilizar, se implementan con static para no instanciar objetos, 
     //dado a que en este programa la dependencia no es tan relevante
@@ -38,12 +38,14 @@ import javax.swing.table.DefaultTableModel;
     Mapa(){    
     }  
     
-    //Constructor que llama a la gui e inicia algunas label, así como que muestra el tablero
+    //Constructor que llama a la GUI e inicia algunas label, así como que muestra el tablero
     Mapa(GUI interfaz){
-  
     this.vista = interfaz;      //Vista es la variable para referirse a la GUI
     NombrePersonaje();
     Tablero();  
+    CargarItems(tanjiro, frameTanjiro.tablaTan);        //Llama a los metodos que se encargan de inicializar los items de los tres jugadores
+    CargarItems(sogeking, frameSogeking.tablaSog);
+    CargarItems(saitama, frameSaitama.tablaSai);
     MostrarStats();
     }
 
@@ -67,14 +69,20 @@ import javax.swing.table.DefaultTableModel;
         vista.vidaT.setText(Integer.toString(tanjiro.getVida()));
         vista.nivelT.setText(Integer.toString(tanjiro.getNivel()));
         vista.experienciaT.setText(Integer.toString(tanjiro.getExperiencia()));
+        vista.defensetan.setText(Integer.toString(tanjiro.getDefensa()));
+        vista.ataquetan.setText(Integer.toString(tanjiro.getAtaque()));
         
         vista.vidaS.setText(Integer.toString(sogeking.getVida()));
         vista.nivelS.setText(Integer.toString(sogeking.getNivel()));
         vista.experienciaS.setText(Integer.toString(sogeking.getExperiencia()));
+        vista.defenseSog.setText(Integer.toString(sogeking.getDefensa()));
+        vista.ataqueSog.setText(Integer.toString(sogeking.getAtaque()));
         
         vista.vidaSa.setText(Integer.toString(saitama.getVida()));
         vista.nivelSa.setText(Integer.toString(saitama.getNivel()));
         vista.experienciaSa.setText(Integer.toString(saitama.getExperiencia()));
+        vista.defenseSai.setText(Integer.toString(saitama.getDefensa()));
+        vista.ataqueSai.setText(Integer.toString(saitama.getAtaque()));
     }
     
     
@@ -118,7 +126,7 @@ import javax.swing.table.DefaultTableModel;
     }
     
     
-    //Metodo que retorna las coordenadas en la matriz del bottonevaluada
+    //Metodo que retorna las coordenadas en la matriz del botton presionado
     public int[] getCoordenadas(JButton casilla) {
         int [] coordenadas = new int[2];
         for (int i=0; i < this.Casillas.length; i++) {
@@ -135,15 +143,18 @@ import javax.swing.table.DefaultTableModel;
    
     //Metodo que realiza el movimiento de los jugadores, mueve colores y direcciones de los jugadores
     public void MoverJugadores(Jugador jugador, Color color){
-
-        temporal=jugador.getPosicion();
-        if (ValidarMovida()){
-            Casillas [temporal[0]][temporal[1]].setBackground(Color.blue);
-            Casillas [position[0]][position[1]].setBackground(color);
-            jugador.setPosicion(position[0], position[1]);
+        if (!jugador.getUsoMover()){
+            temporal=jugador.getPosicion();
+            if (ValidarMovida()){
+                Casillas [temporal[0]][temporal[1]].setBackground(Color.blue);
+                Casillas [position[0]][position[1]].setBackground(color);
+                jugador.setPosicion(position[0], position[1]);
+                jugador.setUsoMover(true);
+            }
         }
+        else
+            JOptionPane.showMessageDialog(vista, "El personaje ya utilizo mover en esta ronda");
     }
-    
     
     //Metodo que valida si la posicion a moverse es valida, solo deja mover horizontal y verticalmente y una sola casilla
     public boolean ValidarMovida(){
@@ -168,14 +179,18 @@ import javax.swing.table.DefaultTableModel;
     }
     
     
-    //Método encargado de cargar las ventanas inciales de los items de todos los jugadores
-    //Funciona con el boton respectivo
-    public void MostrarVentanaItems(Jugador jugador, DefaultTableModel tabla){
+    //Metodo que carga los items iniciales de los tres jugadores
+    public void CargarItems(Jugador jugador, DefaultTableModel tabla){
         for (int i=0; i<jugador.getItems().size(); i++){
             Items products =(Items) jugador.getItems().get(i);
             AñadirRow(products, tabla);
         }
-        
+    }
+    
+
+    //Método encargado de cargar las ventanas inciales de los items de todos los jugadores
+    //Funciona con el boton respectivo
+    public void MostrarVentanaItems(Jugador jugador){        
         if (jugador==tanjiro) 
             frameTanjiro.setVisible(true);
         else if(jugador==sogeking)
@@ -189,8 +204,7 @@ import javax.swing.table.DefaultTableModel;
     //Recibe un item y la tabla del jugador en turno
     public void AñadirRow(Items products, DefaultTableModel tabla){
     
-        Object [] objeto= new Object[3];
-                
+        Object [] objeto= new Object[3];      
         objeto[0]=products.getNombre();
         objeto[1]=products.getPoder();
         objeto[2]=products.getTipo();
@@ -199,23 +213,35 @@ import javax.swing.table.DefaultTableModel;
   
    
     //Método utilizado para utilizar los items de cada jugador
-    //Recibe de entrada el nombre del juagdor, el indice al item y la tabla de items de dicho jugador
+    //Recibe de entrada el nombre del jugador, el indice al item y la tabla de items de dicho jugador
     public void UtilizarItem(String jugador, int index,DefaultTableModel tabla){
         
-        switch (jugador) {
-            case "tanjiro":
-                tanjiro.UsarItem(index);
-                break;
-            case "sogeking":
-                sogeking.UsarItem(index);
-                break;
-            default:
-                saitama.UsarItem(index);
-                break;
-        }
-        tabla.removeRow(index);
-        MostrarStats();   
+        if ("tanjiro".equals(jugador)&& !tanjiro.getUsoItem())
+            UtilizarItemAux(tanjiro, index, tabla);
+        
+        else if ("sogeking".equals(jugador) && !sogeking.getUsoItem())
+            UtilizarItemAux(sogeking, index, tabla);
+
+        else if ("saitama".equals(jugador) && !saitama.getUsoItem())
+            UtilizarItemAux(saitama, index, tabla);
+        
+        else
+            JOptionPane.showMessageDialog(vista, "El personaje ya utilizo algún item en esta ronda");   
     }
+    
+    
+    //Metodo que se encarga de utilizar un item, valida si el jugador que lo solicita ya uso la opcion
+    public void UtilizarItemAux(Jugador jugador, int index, DefaultTableModel tabla){
+        if (!jugador.getUsoItem()){
+        jugador.UsarItem(index);
+        jugador.setUsoItem(true);
+        tabla.removeRow(index);
+        MostrarStats();
+        }
+        else
+            JOptionPane.showMessageDialog(vista, "El personaje ya utilizo algún item en esta ronda"); 
+    }
+
     
     //Metodo que detecta las acciones que el usuario realiza con la interfaz
     //Redirecciona a los metodo correspondientes, segun cada boton
@@ -232,20 +258,19 @@ import javax.swing.table.DefaultTableModel;
                 MoverJugadores(tanjiro,Color.yellow);
                 break;
             case "Items Tanjiro":
-                MostrarVentanaItems(tanjiro, frameTanjiro.tablaTan);
+                MostrarVentanaItems(tanjiro);
                 break;
             case "Items Sogeking":
-                MostrarVentanaItems(sogeking, frameSogeking.tablaSog);
+                MostrarVentanaItems(sogeking);
                 break;
             case "Items Saitama":
-                MostrarVentanaItems(saitama, frameSaitama.tablaSai);
+                MostrarVentanaItems(saitama);
                 break;
             default:
                 position=getCoordenadas((JButton) ae.getSource());
                 break;
         }
     }
-    
     
     //Metodo main llama a la interfaz
     public static void main(String[] args) {
@@ -259,5 +284,6 @@ import javax.swing.table.DefaultTableModel;
         //Hace visible la interfaz
         controladorGUI.vista.setVisible(true);
         controladorGUI.vista.setLocationRelativeTo(null);
+        controladorGUI.vista.setExtendedState(JFrame.MAXIMIZED_BOTH);   //Maximiza la ventana al iniciarla
     }
 }

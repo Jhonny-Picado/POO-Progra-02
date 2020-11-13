@@ -15,7 +15,7 @@ public class Saitama extends Jugador{
         super();
         this.nombre = "Saitama";
         this.tipo = "Super heroe";
-        iniciarItems();
+        iniciarItems(); //Inicializa algunos items al instanciar el juego
     }
     
     

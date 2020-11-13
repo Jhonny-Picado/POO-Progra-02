@@ -27,6 +27,5 @@ public class Medalla extends Items{
  
     public String getCategoria(){
         return this.categoria;
-    }
-    
+    } 
 }

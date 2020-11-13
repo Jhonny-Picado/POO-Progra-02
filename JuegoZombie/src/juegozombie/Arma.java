@@ -6,17 +6,30 @@
 package juegozombie;
 
 /**
- *
- * @author Usuario
+ * Clase padre de las armas
+ * @author Jhonny Picado 
  */
 public class Arma extends Items{
-    private final String nombresM[]={"UnoAUno", "corto alcance" , "largo alcance"};
-    private final String categorias[]={"Oro","Plata","Bronce"};
     
-    Arma(){
+    //Atributos de las armas
+    protected int nivel;
+    protected int ruido; 
+    protected int alcance;
     
+    //Constructor por defecto
+    public Arma(){ 
+    }
     
+    //Setters de los atributos
+    public int nivel(){
+        return this.nivel;
+    }
+    
+    public int getRuido(){
+        return this.ruido;
+    }
+    
+    public int getalcance(){
+        return this.alcance;
     }
 }
-    
-

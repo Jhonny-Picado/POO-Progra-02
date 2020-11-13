@@ -20,7 +20,7 @@ public class Items {
     public Items(){
     }
     
-    //Metodo utilizado para usar el item 
+    //Metodos getters y setters de los taributos de items
     public int UsarItem(){
         return this.poder;
     }
@@ -37,6 +37,4 @@ public class Items {
     public int getPoder(){
         return this.poder;
     }
-    
-    
 }

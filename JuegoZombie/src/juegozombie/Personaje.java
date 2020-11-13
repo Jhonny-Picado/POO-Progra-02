@@ -21,27 +21,28 @@ public class Personaje {
     protected int [] posicion;
     protected boolean muerto;
     protected String nombre;
-    List<Items> articulos = new ArrayList<>();
+    List<Items> articulos = new ArrayList<>();      //Lista de items de cada personaje
 
     //Constructor de la clase
     public Personaje(){
-        this.vida=100;
-        this.defensa=100;
         this.muerto=false;
         this.posicion=new int[2];
     }
     
+    //Metodos getters y setters de los atributos
+    public int getAtaque(){
+        return this.ataque;
+    }
     
-    //Metodo que recibe de parametro un numero, suma el ataque del personaje
-    //y se usara despues para restar la defensa, vida y demás 
-    public int Atacar(int ataque){
+    public void setAtaque(int ataque){
         this.ataque=ataque;
-        return ataque;
     }
     
     //Metodo utilizado para restarle la vida al personaje
     public void RecibirDano(int golpe){
-        this.vida-=golpe;    
+        this.vida-=golpe;
+        if (vida<0)
+                vida=0;
     }
     
     //Metodo para modificar el atributo booleano de muerto
@@ -82,28 +83,37 @@ public class Personaje {
         return this.vida;
     }
     
+    //Metodo que retorna la posicion en la cual se encuentra el jugador en el tablero
+    public int [] getPosicion(){
+        return this.posicion;
+    }
+    
+    //Metodo que retorna la lista de items de cada personaje 
+    public List<Items> getItems(){
+        return this.articulos;
+    }
+    
+    ///Modifica la posicion del usuario en el tablero
     public void setPosicion(int fila,int columna){
         this.posicion[0]=fila;
         this.posicion[1]=columna;
     }
     
-    public int [] getPosicion(){
-        return this.posicion;
-    }
-    
-    public List<Items> getItems(){
-        return this.articulos;
-    }
-    
-    
     //Metodo protegido que inicia los items de los jugadores
     protected void iniciarItems(){
-        
-        for (int i=0; i<2; i++){
+    
+    //Le doy dos items de cada tipo a cada jugador
+    for (int i=0; i<2; i++){
         Consumible con =new Consumible();
         this.articulos.add(con);
+        
+        Medalla med = new Medalla();
+        this.articulos.add(med);
+        
+        Escudo esc= new Escudo();
+        this.articulos.add(esc);
         }
-       Medalla med = new Medalla();
-       this.articulos.add(med);
+        CortoAlcance cor =new CortoAlcance();
+        this.articulos.add(cor);
     }
 }
