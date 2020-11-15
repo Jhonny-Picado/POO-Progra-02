@@ -46,20 +46,20 @@ public class Personaje {
     //Metodo utilizado para restarle la vida al personaje
     public void RecibirDano(int golpe){
         this.vida-=golpe;
-        if (vida<0)
-                vida=0;
-    }
-    
-    //Metodo para modificar el atributo booleano de muerto
-    //se valida despues y se usan otros metodos en el mapa
-    public void Muerto(){
-        if (vida==0){
+        if (vida<0){
+            vida=0;
             this.muerto=true;
         }
     }
     
+    //Metodo para modificar el atributo booleano de muerto
+    //se valida despues y se usan otros metodos en el mapa
+    public boolean Muerto(){
+        return this.muerto;
+    }
+    
     //Metodo a usar para incrementar la vida, ya sea por una habilidad o un item
-    public void setVida(Jugador jugador,int incremento){
+    public void setVida(Personaje jugador,int incremento){
         Tanjiro tan=new Tanjiro();
         
         if (vida<100){

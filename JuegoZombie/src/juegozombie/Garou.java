@@ -7,18 +7,16 @@ package juegozombie;
 
 /**
  *
- * @author Usuario
+ * @author Jhonny Picado
  */
 public class Garou extends Enemigo{
-    Garou(){
-        this.nombre=" Garou";
-        this.tipo=" plebeyo";
-        this.vision=2;
-        this.vida*=1.5;
-    
-    }
-        public void acompanante(){
+   
+    //Constructor del enemigo Garou
+    public Garou(){
+        super();
+        this.nombre="Garou";
+        this.vida=5;
+        this.vision=1;
+        this.alcance=1;
     }
 }
-
-

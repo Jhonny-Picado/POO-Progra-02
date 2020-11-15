@@ -5,6 +5,10 @@
  */
 package juegozombie;
 
+import static Interfaz.Mapa.vista;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *@author Jhonny Picado
  * Clase que hereda de personaje y a su vez es padre de los jugadores
@@ -34,6 +38,8 @@ public class Jugador extends Personaje{
         this.usoMover=false;
         this.habilidad1=false;
         this.habilidad2=false;
+        this.habilidad3=true;
+        this.ataque=0;
     }
     
     //Metodo utilizado para subir el nivel del jugador
@@ -119,4 +125,33 @@ public class Jugador extends Personaje{
     public boolean getHabilidad1(){
         return this.habilidad1;
     }
+    public boolean getHabilidad3(){
+        return this.habilidad3;
+    }
+
+/*
+    public void AgregarItem(Jugador jugador, DefaultTableModel tabla){
+        Consumible con = new Consumible();
+        Tanjiro user=new Tanjiro();
+        
+        if (jugador.getItems().size()<8){    
+            jugador.AgregarItem(con);
+            AñadirRow(con, tabla);
+           }
+        else if("Tanjiro".equals(jugador.getNombre()))
+            user=(Tanjiro)(jugador);
+            user.MasCapacidad(con);
+        }
+        else{
+            JOptionPane.showMessageDialog(vista, "El personaje no tiene la habilidad de poseer más items");
+        }
+    }*/
+    
+    
+    public void ResetearUsos(){
+        this.usoItem=false;
+        this.usoAtaque=false;
+        this.usoMover=false;
+    }
+
 }

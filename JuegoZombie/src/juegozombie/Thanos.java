@@ -7,17 +7,16 @@ package juegozombie;
 
 /**
  *
- * @author Chris
+ * @author Jhonny Picado
  */
 public class Thanos extends Enemigo{
     
-    //const enemigo
-    Thanos(){
-    super();
-    this.nombre="Thanos";
-    this.tipo= "Rey del mundo";
-    this.vida*=2;
-    this.vision=2;
-    
+    //constructor de Thanos
+    public Thanos(){
+        super();
+        this.nombre="Thanos";
+        this.vida=20;
+        this.vision=2;
+        this.alcance=2;
     }
 }

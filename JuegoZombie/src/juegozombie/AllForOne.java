@@ -7,16 +7,16 @@ package juegozombie;
 
 /**
  *
- * @author Usuario
+ * @author Jhonny Picado Vega
  */
 public class AllForOne extends Enemigo  {
-    AllForOne(){
-        this.nombre=" AllForOne";
-        this.tipo="Inmortal";
+    
+    //Constructor del enemigo AllForOne
+    public AllForOne(){
+        super();
+        this.nombre="AllForOne";
         this.vision=3;
-        this.vida*=3.5;
-    
-    }
-    
-    
+        this.vida=50;
+        this.alcance=3;
+    } 
 }

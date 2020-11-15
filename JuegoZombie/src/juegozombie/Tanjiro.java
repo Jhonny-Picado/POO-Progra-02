@@ -39,4 +39,7 @@ public class Tanjiro extends Jugador{
         }
         return numero;
     }  
+    
+    
+    //La tercera habilidad de este personaje no es necesario hacer un metodo
 }

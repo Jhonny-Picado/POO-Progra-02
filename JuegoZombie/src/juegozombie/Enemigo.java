@@ -5,61 +5,42 @@
  */
 package juegozombie;
 
+import java.util.List;
+import javax.swing.JOptionPane;
+
 /**
  *
- * @author Chris
+ * @author Jhonny Picado
  */
 public class Enemigo extends Personaje{
     
     //Atributos de la clase
     protected int vision;
-    protected int sonido;
-    protected String tipo;
-    protected int vida;
-    
+    protected int alcance;
+            
     //Constructor
-    Enemigo(){        
+    public Enemigo(){        
         super();
-        this.vision=1;
-        this.sonido=0;
     }
+
     
-    //Para subir la vision en el tablero
-    public void AumentarVision(){
-        this.vision+=1;
-        
-    }
-    
-    
-    /*
-    //Metodo utilizado para usar un item
-    public int UsarItem(int posicion){
-        
-       return items.get(posicion);
-    }
-    
-    public int UsarHabilidad(){
-        return
-    }*/
-    
-    //Metodo utilizado para modificar la experiencia del jugador
-    public void set(int valor){
-        this.sonido+=valor;
-    }
-    public void Atacar(){
-        if (this.vision<=3);
-        
-    }
     public void escuchar(){
-    
-    
     }
+    
+    
     public void dejarItem(){
-        
-    
-    
     }
     
+    public Enemigo RetornaEnemigo(List<Enemigo> enemigos,int[]posicion){
+        
+        for (Enemigo enemigo:enemigos){
+            
+            if (enemigo.getPosicion()==posicion){
+                return enemigo;
+            }
+        }
+        return null;
+    }
     
     
     

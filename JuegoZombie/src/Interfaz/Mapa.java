@@ -12,6 +12,9 @@ import javax.swing.*;
 import juegozombie.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import javax.swing.border.BevelBorder;
 import javax.swing.table.DefaultTableModel;
 /**
@@ -33,7 +36,8 @@ import javax.swing.table.DefaultTableModel;
     public static int []temporal= new int [2]; 
     public static int []position= new int [2]; 
     public static int []base={0,7};
-   
+    public static List<Enemigo>  enemigos = new ArrayList<>();
+     
     //Constructor por defecto
     Mapa(){    
     }  
@@ -46,6 +50,7 @@ import javax.swing.table.DefaultTableModel;
     CargarItems(tanjiro, frameTanjiro.tablaTan);        //Llama a los metodos que se encargan de inicializar los items de los tres jugadores
     CargarItems(sogeking, frameSogeking.tablaSog);
     CargarItems(saitama, frameSaitama.tablaSai);
+    ColocarEnemigos(5);
     MostrarStats();
     }
 
@@ -108,6 +113,7 @@ import javax.swing.table.DefaultTableModel;
             }
         }
         darPosicionesIniciales();
+        AsignarObstaculos();
         vista.PanelTablero.setLayout(new GridLayout(15, 15));
     }
   
@@ -140,6 +146,76 @@ import javax.swing.table.DefaultTableModel;
         return coordenadas;
     }
     
+    
+    
+    
+    
+    //Metodo que cambia el color de fondo de los botones en el tablero para indicar que estos son obstaculos 
+    public static void AsignarObstaculos(){
+        int randf, randc;
+        
+        for(int i=0; i<18; i++){
+            randf= (int)(Math.random()*14+0);
+            randc=(int) (Math.random()*9+4);
+                if (Casillas[randf][randc].getBackground()==Color.blue)
+                Casillas[randf][randc].setBackground(Color.orange);
+        }
+    }
+    
+    public void ColocarEnemigos(int numero){
+
+        Enemigo ene;
+        for (int i=0; i<numero; i++){
+            int filar= (int)(Math.random()*14+0);
+            int colr=(int)(Math.random()*8+6);
+
+            if (Casillas[filar][colr].getBackground()==Color.BLUE){
+                int random= (int)(Math.random()*2+0);
+
+                switch (random) {
+                    case 0:
+                        ene=new Garou();
+                        break;
+                    case 1:
+                        ene=new Thanos();
+                        break;
+                    default:
+                        ene=new AllForOne();
+                        break;
+                }
+            ene.setPosicion(filar,colr);
+            this.enemigos.add(ene);
+            Casillas[filar][colr].setBackground(Color.darkGray);
+            }  
+        }
+    }
+    
+    
+    public void MoverEnemigo(){
+       
+        for (Enemigo enemigo : enemigos) {
+            
+            temporal=enemigo.getPosicion();
+            
+            if (temporal[1]!=0 && Casillas[temporal[0]][temporal[1]-1].getBackground() == Color.blue){
+                Casillas[temporal[0]][temporal[1]-1].setBackground(Color.darkGray);
+                Casillas[temporal[0]][temporal[1]].setBackground(Color.blue);
+                enemigo.setPosicion(temporal[0], temporal[1]-1); 
+            }
+            else if(temporal[0]!=0 && Casillas[temporal[0]-1][temporal[1]].getBackground() == Color.blue){
+                Casillas[temporal[0]-1][temporal[1]].setBackground(Color.darkGray);
+                Casillas[temporal[0]][temporal[1]].setBackground(Color.blue);
+                enemigo.setPosicion(temporal[0]-1, temporal[1]); 
+            }
+            else if(temporal[0]!=14 && Casillas[temporal[0]+1][temporal[1]].getBackground() == Color.blue){
+                Casillas[temporal[0]+1][temporal[1]].setBackground(Color.darkGray);
+                Casillas[temporal[0]][temporal[1]].setBackground(Color.blue);
+                enemigo.setPosicion(temporal[0]+1, temporal[1]); 
+            }
+        }
+    }
+    
+    
    
     //Metodo que realiza el movimiento de los jugadores, mueve colores y direcciones de los jugadores
     public void MoverJugadores(Jugador jugador, Color color){
@@ -150,6 +226,7 @@ import javax.swing.table.DefaultTableModel;
                 Casillas [position[0]][position[1]].setBackground(color);
                 jugador.setPosicion(position[0], position[1]);
                 jugador.setUsoMover(true);
+                FlujoJuego();
             }
         }
         else
@@ -160,8 +237,13 @@ import javax.swing.table.DefaultTableModel;
     public boolean ValidarMovida(Jugador jugador){
         
         JButton aux=Casillas[position[0]][position[1]];
-        if (aux.getBackground()!= Color.blue)
-            return false;
+        if (aux.getBackground()!= Color.blue){  
+            
+            if (aux.getBackground()==Color.orange && "Tanjiro".equals(jugador.getNombre()) && jugador.getHabilidad3())
+                return true;
+            else
+                return false;
+        }
         else if("Saitama".equals(jugador.getNombre()) && jugador.getHabilidad1())   //Primera habilidad de Saitama moverse libre
             return true;
         else if (temporal[1]!=0 && Casillas[temporal[0]][temporal[1]-1]==aux){
@@ -251,15 +333,16 @@ import javax.swing.table.DefaultTableModel;
     //Metodo que se encarga de utilizar un item, valida si el jugador que lo solicita ya uso la opcion
     public void UtilizarItemAux(Jugador jugador, int index, DefaultTableModel tabla){
         if (!jugador.getUsoItem()){
-        jugador.UsarItem(jugador,index);
-        jugador.setUsoItem(true);
-        tabla.removeRow(index);
-        MostrarStats();
+            jugador.UsarItem(jugador,index);
+            jugador.setUsoItem(true);
+            tabla.removeRow(index);
+            MostrarStats();
+            FlujoJuego();
         }
         else
             JOptionPane.showMessageDialog(vista, "El personaje ya utilizo algún item en esta ronda"); 
     }
-
+    
     
     //Metodo que detecta las acciones que el usuario realiza con la interfaz
     //Redirecciona a los metodo correspondientes, segun cada boton
@@ -285,20 +368,62 @@ import javax.swing.table.DefaultTableModel;
                 MostrarVentanaItems(saitama);
                 break;
             case "Atacar Tanjiro":
-              //  AgregarItem(tanjiro, frameTanjiro.tablaTan);
+                Atacar(tanjiro);
                 break;
             case "Atacar Sogeking":
-                //AgregarItem(sogeking, frameSogeking.tablaSog);
+                Atacar(sogeking);
                 break;          
             case "Atacar Saitama":
-               // AgregarItem(saitama, frameSaitama.tablaSai);
+                Atacar(tanjiro);
+                break;
+            case "Pasar Turno":
+                ReglasEnemigos();
                 break;
             default:
                 position=getCoordenadas((JButton) ae.getSource());
                 break;
         }
     }
+
     
+    
+    public void FlujoJuego(){
+        
+        boolean estadoT=tanjiro.getUsoItem()&& tanjiro.getUsoMover();
+        boolean estadoSo=sogeking.getUsoItem()&& sogeking.getUsoMover();
+        boolean estadoSa=saitama.getUsoItem()&& saitama.getUsoMover();
+        
+        if (estadoT && estadoSo && estadoSa)
+            ReglasEnemigos();
+    }
+
+    
+    public void ReglasEnemigos(){
+        MoverEnemigo();
+        tanjiro.ResetearUsos();
+        saitama.ResetearUsos();
+        sogeking.ResetearUsos();
+    }
+
+    
+    public void Atacar(Jugador jugador){
+        Enemigo ene = new Enemigo();
+        Enemigo aux= new Enemigo();
+        if(Casillas[position[0]][position[1]].getBackground()== Color.darkGray){
+           aux=ene.RetornaEnemigo(enemigos, position);
+           System.out.println(jugador.getAtaque());
+           aux.RecibirDano(jugador.getAtaque());
+           if (aux.Muerto()){
+               Casillas[position[0]][position[1]].setBackground(Color.blue);
+               enemigos.remove(aux);
+               JOptionPane.showMessageDialog(vista, "El personaje ha eliminado un enemigo"); 
+           }
+           else
+               JOptionPane.showMessageDialog(vista, "Aun le queda vida al enemigo: le queda"+aux.getVida());
+        }   
+    }   
+            
+            
     //Metodo main llama a la interfaz
     public static void main(String[] args) {
     
