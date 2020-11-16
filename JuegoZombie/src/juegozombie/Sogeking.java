@@ -32,10 +32,23 @@ public class Sogeking extends Jugador{
     
     
     //Metodo de la segunda habilidad de este jugador, le duplica el incremento de ataque si ya posee la habilidad
-    public int DuplicarAtaqueCorto(int numero){
-        if (this.habilidad2){
+    public int DuplicarAtaqueCorto(Jugador jugador,int numero){
+        if (jugador.habilidad2){
             numero*=2;
         }
         return numero;
     }      
+
+        public String[] Nombrehabs(){
+        String[] nombres= new String[3];
+        
+        if (this.habilidad1)
+            nombres[0]="Arma Grande inicial";
+        if (this.habilidad2)
+            nombres [1]="Duplicar Arma-Corta";
+        if (this.habilidad3)
+            nombres[2]="Revivir";
+        return nombres;
+    }
+
 }

@@ -18,6 +18,7 @@ public class Tanjiro extends Jugador{
         super();
         this.nombre="Tanjiro";
         this.tipo = "Espadachín";
+        this.habilidad1=true;
         iniciarItems();     //Metodo que le añade algunos items en su inicializacion
     }
     
@@ -34,12 +35,28 @@ public class Tanjiro extends Jugador{
     
     //Metodo de la segunda habilidad de este jugador, le duplica el incremento de la vida si ya posee la habilidad
     public int DuplicarCuracion(int numero){
+        
         if (this.habilidad2){
-            numero*=2;
+            return numero*2;
         }
         return numero;
     }  
     
     
-    //La tercera habilidad de este personaje no es necesario hacer un metodo
+    //Para la tercera habilidad de este personaje no es necesario hacer un metodo
+    
+    
+    public String[] Nombrehabs(){
+        String[] nombres= new String[3];
+        
+        if (this.habilidad1)
+            nombres[0]="Aumentar Inventario";
+        if (this.habilidad2)
+            nombres [1]="Duplicar Curación";
+        if (this.habilidad3)
+            nombres[2]="Ocultarse en obstáculos";
+        return nombres;
+    }
+    
+    
 }

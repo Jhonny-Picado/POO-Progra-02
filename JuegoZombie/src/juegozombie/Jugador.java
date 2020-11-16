@@ -5,10 +5,6 @@
  */
 package juegozombie;
 
-import static Interfaz.Mapa.vista;
-import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
-
 /**
  *@author Jhonny Picado
  * Clase que hereda de personaje y a su vez es padre de los jugadores
@@ -25,6 +21,7 @@ public class Jugador extends Personaje{
     protected boolean habilidad1;
     protected boolean habilidad2;
     protected boolean habilidad3;
+    protected Arma armaActual;
     
     //Constructor
     public Jugador(){        
@@ -36,18 +33,34 @@ public class Jugador extends Personaje{
         this.usoItem=false;
         this.usoAtaque=false;
         this.usoMover=false;
-        this.habilidad1=false;
         this.habilidad2=false;
-        this.habilidad3=true;
+        this.habilidad3=false;
         this.ataque=0;
     }
     
     //Metodo utilizado para subir el nivel del jugador
     public void SubirNivel(){
-        this.nivel+=1;
+        if (experiencia>=30){
+            this.nivel+=1;
+            this.experiencia-=experiencia;
+        }
+        
+        if ((nivel == 2 || nivel== 5 || nivel ==7)){
+            switch(nivel){
+                case 2:
+                    setHabilidad1();
+                    break;
+                case 5:
+                    setHabilidad2();
+                    break;
+                case 7:
+                    setHabilidad3();
+                    break;
+            }   
+        }
+        
     }
     
-
     //Metodo utilizado para usar un item
     public void UsarItem(Jugador jugador, int index){
         
@@ -58,22 +71,29 @@ public class Jugador extends Personaje{
             setVida(jugador,item.getPoder());
         
         else if ("Medalla".equals(item.getTipo()))
-            setExperiencia(jugador,item.getPoder());
+            setExperiencia(item.getPoder());
         
         else if ("Escudo".equals(item.getTipo()))
             setDefensa(item.getPoder());
         
-        else
+        else{
             setAtaque(jugador,item);
+            this.armaActual=(Arma)item;
+        }    
         this.articulos.remove(index);
     }
     
     //Getters y setter setters de los artibutos de los jugadores
-    public void setExperiencia(Jugador jugador, int valor){
-        Saitama sait= new Saitama();
-        if ("Saitama".equals(jugador.getNombre()))
-            valor=sait.DuplicarExperiencia(valor);
-        this.experiencia+=valor;
+    public void setExperiencia(int valor){
+       
+        if ("Saitama".equals(this.getNombre())){
+            Saitama sait=(Saitama)this;
+            experiencia+=sait.DuplicarExperiencia(valor);
+        }
+        else
+            this.experiencia+=valor;
+        
+        this.SubirNivel();
     }
     
     public String getEspecialidad(){
@@ -119,9 +139,25 @@ public class Jugador extends Personaje{
     }
     
     public void setHabilidad1(){
-        this.habilidad1=true;
+        if (!habilidad1){
+            this.habilidad1=true;
+            this.experiencia-=experiencia;
+        }
     }
     
+    public void setHabilidad2(){
+        if (!habilidad2){
+            this.habilidad2=true;
+            this.experiencia-=experiencia;
+        }
+    }
+    
+    public void setHabilidad3(){
+        if (!habilidad3){
+            this.habilidad3=true;
+            this.experiencia-=experiencia;
+        }
+    }
     public boolean getHabilidad1(){
         return this.habilidad1;
     }
@@ -147,6 +183,9 @@ public class Jugador extends Personaje{
         }
     }*/
     
+    public Arma getArmaActual(){
+        return this.armaActual;
+    }
     
     public void ResetearUsos(){
         this.usoItem=false;

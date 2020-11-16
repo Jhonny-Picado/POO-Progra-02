@@ -39,14 +39,14 @@ public class Personaje {
         Sogeking sog= new Sogeking();
         
         if ("Sogeking".equals(jugador.getNombre()) && "Arma Corta".equals(item.getTipo()))
-            numero=sog.DuplicarAtaqueCorto(numero);
+            numero=sog.DuplicarAtaqueCorto(jugador,numero);
         this.ataque=numero;
     }
     
     //Metodo utilizado para restarle la vida al personaje
     public void RecibirDano(int golpe){
         this.vida-=golpe;
-        if (vida<0){
+        if (vida<=0){
             vida=0;
             this.muerto=true;
         }
@@ -60,12 +60,12 @@ public class Personaje {
     
     //Metodo a usar para incrementar la vida, ya sea por una habilidad o un item
     public void setVida(Personaje jugador,int incremento){
-        Tanjiro tan=new Tanjiro();
+        Tanjiro tan=(Tanjiro)jugador;
         
         if (vida<100){
             if ("Tanjiro".equals(jugador.getNombre()))
-                incremento=tan.DuplicarCuracion(incremento);
-            
+                vida+=tan.DuplicarCuracion(incremento);
+            else
             vida+=incremento;
             
             if (vida>100)

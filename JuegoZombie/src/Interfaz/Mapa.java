@@ -13,7 +13,6 @@ import juegozombie.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import javax.swing.border.BevelBorder;
 import javax.swing.table.DefaultTableModel;
@@ -147,9 +146,6 @@ import javax.swing.table.DefaultTableModel;
     }
     
     
-    
-    
-    
     //Metodo que cambia el color de fondo de los botones en el tablero para indicar que estos son obstaculos 
     public static void AsignarObstaculos(){
         int randf, randc;
@@ -192,12 +188,34 @@ import javax.swing.table.DefaultTableModel;
     
     
     public void MoverEnemigo(){
-       
         for (Enemigo enemigo : enemigos) {
             
             temporal=enemigo.getPosicion();
-            
-            if (temporal[1]!=0 && Casillas[temporal[0]][temporal[1]-1].getBackground() == Color.blue){
+            if(temporal[0]==7 && temporal[1]-1==0){
+                JOptionPane.showMessageDialog(vista, "Has Perdido!!");  
+                break;
+            }
+            else if(temporal[1]==0 && temporal[0]<7) {
+                if(Casillas[temporal[0]+1][temporal[1]].getBackground()==Color.blue){
+                Casillas[temporal[0]+1][temporal[1]].setBackground(Color.darkGray);
+                Casillas[temporal[0]][temporal[1]].setBackground(Color.blue);
+                enemigo.setPosicion(temporal[0]+1, temporal[1]);}                
+                else if (temporal[0]+1==7){
+                    JOptionPane.showMessageDialog(vista, "Has Perdido!!");
+                    break;
+                }
+            }
+            else if(temporal[1]==0 && temporal[0]>7){
+                if (Casillas[temporal[0]-1][temporal[1]].getBackground()==Color.blue){
+                Casillas[temporal[0]-1][temporal[1]].setBackground(Color.darkGray);
+                Casillas[temporal[0]][temporal[1]].setBackground(Color.blue);
+                enemigo.setPosicion(temporal[0]-1, temporal[1]);}
+                else if (temporal[0]-1==7){
+                    JOptionPane.showMessageDialog(vista, "Has Perdido!!");  
+                    break;
+                }
+            }
+            else if (temporal[1]!=0 && Casillas[temporal[0]][temporal[1]-1].getBackground() == Color.blue){
                 Casillas[temporal[0]][temporal[1]-1].setBackground(Color.darkGray);
                 Casillas[temporal[0]][temporal[1]].setBackground(Color.blue);
                 enemigo.setPosicion(temporal[0], temporal[1]-1); 
@@ -210,8 +228,9 @@ import javax.swing.table.DefaultTableModel;
             else if(temporal[0]!=14 && Casillas[temporal[0]+1][temporal[1]].getBackground() == Color.blue){
                 Casillas[temporal[0]+1][temporal[1]].setBackground(Color.darkGray);
                 Casillas[temporal[0]][temporal[1]].setBackground(Color.blue);
-                enemigo.setPosicion(temporal[0]+1, temporal[1]); 
-            }
+                enemigo.setPosicion(temporal[0]+1, temporal[1]);
+            
+            } 
         }
     }
     
@@ -226,6 +245,8 @@ import javax.swing.table.DefaultTableModel;
                 Casillas [position[0]][position[1]].setBackground(color);
                 jugador.setPosicion(position[0], position[1]);
                 jugador.setUsoMover(true);
+                jugador.setExperiencia(3);
+                MostrarStats();
                 FlujoJuego();
             }
         }
@@ -246,7 +267,16 @@ import javax.swing.table.DefaultTableModel;
         }
         else if("Saitama".equals(jugador.getNombre()) && jugador.getHabilidad1())   //Primera habilidad de Saitama moverse libre
             return true;
-        else if (temporal[1]!=0 && Casillas[temporal[0]][temporal[1]-1]==aux){
+        
+        else 
+            return ValidarMovimiento(aux);
+        
+    }
+    
+    
+    public boolean ValidarMovimiento(JButton aux){
+        
+        if (temporal[1]!=0 && Casillas[temporal[0]][temporal[1]-1]==aux){
             return true;
         }
         else if (temporal[1]!=14 && Casillas[temporal[0]][temporal[1]+1]==aux){
@@ -260,8 +290,8 @@ import javax.swing.table.DefaultTableModel;
         }
         else
             return false;
+        
     }
-    
     
     //Metodo que carga los items iniciales de los tres jugadores
     public void CargarItems(Jugador jugador, DefaultTableModel tabla){
@@ -271,21 +301,19 @@ import javax.swing.table.DefaultTableModel;
         }
     }
     
-/*
-    public void AgregarItem(Jugador jugador, DefaultTableModel tabla){
-        Consumible con = new Consumible();
+
+    public void AgregarItem(Jugador jugador, DefaultTableModel tabla, Items item, int pos){
+        enemigos.remove(pos);
         if (jugador.getItems().size()<8){    
-            jugador.AgregarItem(con);
-            AñadirRow(con, tabla);
+            jugador.AgregarItem(item);
+            AñadirRow(item, tabla);
            }
         else if("Tanjiro".equals(jugador.getNombre()))
-            tanjiro. MasCapacidad(con);
+            tanjiro. MasCapacidad(item);
         else{
             JOptionPane.showMessageDialog(vista, "El personaje no tiene la habilidad de poseer más items");
         }
-    }
-   Agrega items y de una usa la habilidad 1 de tanjiro*/
-    
+    }    
     
     
     //Método encargado de cargar las ventanas inciales de los items de todos los jugadores
@@ -368,16 +396,19 @@ import javax.swing.table.DefaultTableModel;
                 MostrarVentanaItems(saitama);
                 break;
             case "Atacar Tanjiro":
-                Atacar(tanjiro);
+                AtacarAux(tanjiro);
                 break;
             case "Atacar Sogeking":
-                Atacar(sogeking);
+                AtacarAux(sogeking);
                 break;          
             case "Atacar Saitama":
-                Atacar(tanjiro);
+                AtacarAux(saitama);
                 break;
             case "Pasar Turno":
                 ReglasEnemigos();
+                break;
+            case "Habilidades de Jugadores":
+                MostrarHabilidades();
                 break;
             default:
                 position=getCoordenadas((JButton) ae.getSource());
@@ -386,12 +417,37 @@ import javax.swing.table.DefaultTableModel;
     }
 
     
+    public static void MostrarHabilidades(){
+        Habilidades ventana=new Habilidades();
+        
+        String[] habsT= tanjiro.Nombrehabs();
+        String[] habsSo= sogeking.Nombrehabs();
+        String[] habsSa= saitama.Nombrehabs();
+        
+        
+        ventana.habilidadT1.setText(habsT[0]);
+        ventana.habilidadT2.setText(habsT[1]);
+        ventana.habilidadT3.setText(habsT[2]);
+        
+        ventana.habilidadSo1.setText(habsSo[0]);
+        ventana.habilidadSo2.setText(habsSo[1]);
+        ventana.habilidadSo3.setText(habsSo[2]);
+       
+        ventana.habilidadSa1.setText(habsSa[0]);
+        ventana.habilidadSa2.setText(habsSa[1]);
+        ventana.habilidadSa3.setText(habsSa[2]);        
+                
+        ventana.setVisible(true);
+        
+    }
+    
+    
     
     public void FlujoJuego(){
         
-        boolean estadoT=tanjiro.getUsoItem()&& tanjiro.getUsoMover();
-        boolean estadoSo=sogeking.getUsoItem()&& sogeking.getUsoMover();
-        boolean estadoSa=saitama.getUsoItem()&& saitama.getUsoMover();
+        boolean estadoT=tanjiro.getUsoItem()&& tanjiro.getUsoMover() && tanjiro.getUsoAtaque();
+        boolean estadoSo=sogeking.getUsoItem()&& sogeking.getUsoMover() && sogeking.getUsoAtaque();
+        boolean estadoSa=saitama.getUsoItem()&& saitama.getUsoMover() && saitama.getUsoAtaque();
         
         if (estadoT && estadoSo && estadoSa)
             ReglasEnemigos();
@@ -403,23 +459,60 @@ import javax.swing.table.DefaultTableModel;
         tanjiro.ResetearUsos();
         saitama.ResetearUsos();
         sogeking.ResetearUsos();
+        JOptionPane.showMessageDialog(vista, "Aparecen más enemigos");
+        int rand=(int)(Math.random()*5+1);
+        ColocarEnemigos(rand);
     }
 
+    public void AtacarAux(Jugador jugador){
+        JButton boton=Casillas[position[0]][position[1]];
+        temporal=jugador.getPosicion();
+        
+        if (!jugador.getUsoAtaque()){
+        
+            if ("Arma Grande".equals(jugador.getArmaActual().getTipo())){
+                Atacar(jugador);
+                jugador.setExperiencia(15);
+                MostrarStats();
+            }
+            else if (ValidarMovimiento(boton)){ 
+                Atacar(jugador);
+                jugador.setExperiencia(8);
+                MostrarStats();
+                }
+            }
+        else
+            JOptionPane.showMessageDialog(vista, "El Personaje ya uso atacar");   
+    }
     
+    
+    //Esta vara hay que acomodarla si sirve pero hay que acomodarla lo de los items
     public void Atacar(Jugador jugador){
-        Enemigo ene = new Enemigo();
-        Enemigo aux= new Enemigo();
+        int pos;
         if(Casillas[position[0]][position[1]].getBackground()== Color.darkGray){
-           aux=ene.RetornaEnemigo(enemigos, position);
-           System.out.println(jugador.getAtaque());
-           aux.RecibirDano(jugador.getAtaque());
-           if (aux.Muerto()){
+            pos=enemigos.get(0).RetornaEnemigo(enemigos, position);
+            jugador.setUsoAtaque(true);
+            enemigos.get(pos).RecibirDano(jugador.getAtaque());
+            if (enemigos.get(pos).Muerto()){
                Casillas[position[0]][position[1]].setBackground(Color.blue);
-               enemigos.remove(aux);
-               JOptionPane.showMessageDialog(vista, "El personaje ha eliminado un enemigo"); 
-           }
-           else
-               JOptionPane.showMessageDialog(vista, "Aun le queda vida al enemigo: le queda"+aux.getVida());
+               JOptionPane.showMessageDialog(vista, "El personaje ha eliminado un enemigo");
+               if (!enemigos.get(pos).getItems().isEmpty()){
+                    int opcion = JOptionPane.showConfirmDialog (null,"El enemigo dejo un item. ¡Desea adquirirlo?", "Item" ,JOptionPane.YES_NO_OPTION);
+                    if (opcion==JOptionPane.YES_OPTION){
+                       if("Tanjiro".equals(jugador.getNombre()))
+                            AgregarItem(jugador, frameTanjiro.tablaTan, enemigos.get(pos).getItems().get(0), pos);
+                        else if ("Sogeking".equals(jugador.getNombre()))
+                            AgregarItem(jugador, frameSogeking.tablaSog, enemigos.get(pos).getItems().get(0),pos);
+                        else 
+                            AgregarItem(jugador, frameSaitama.tablaSai, enemigos.get(pos).getItems().get(0),pos);
+                        }
+                    else
+                       enemigos.remove(pos);
+               }
+               else enemigos.remove(pos);
+            }
+            else
+                JOptionPane.showMessageDialog(vista, "Aun le queda vida al enemigo: le queda  "+enemigos.get(pos).getVida());
         }   
     }   
             
