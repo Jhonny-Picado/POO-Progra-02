@@ -15,9 +15,10 @@ public class Saitama extends Jugador{
         super();
         this.nombre = "Saitama";
         this.tipo = "Super heroe";
-        this.habilidad1=true;
+        this.habilidad1=false;
         iniciarItems(); //Inicializa algunos items al instanciar el juego
     }
+    
     
     //Metodo de la segunda habilidad de este jugador, le duplica el incremento de experiencia si ya posee la habilidad
     public int DuplicarExperiencia(int numero){

@@ -16,6 +16,7 @@ public class Sogeking extends Jugador{
         super();
         this.nombre="Sogeking";
         this.tipo ="Dios";
+        this.habilidad1=true;
         iniciarItems(); //Inicializa algunos items al instanciar el objeto
         ArmaInicial();
     }  

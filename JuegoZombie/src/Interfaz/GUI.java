@@ -86,7 +86,7 @@ public class GUI extends javax.swing.JFrame {
         jPanel6 = new javax.swing.JPanel();
         jButton4 = new javax.swing.JButton();
         jLabel20 = new javax.swing.JLabel();
-        Habilidades = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -229,26 +229,24 @@ public class GUI extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(bMoverS1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(63, 63, 63)
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(especialidadT))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(66, 66, 66)
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(experienciaT)))
-                        .addContainerGap(70, Short.MAX_VALUE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(32, 32, 32)
-                        .addComponent(bAtacarS1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(51, 51, 51)
-                        .addComponent(bItems1)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addComponent(bAtacarS1, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addComponent(bItems1))
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addGap(63, 63, 63)
+                            .addComponent(jLabel5)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(especialidadT))
+                        .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addGap(66, 66, 66)
+                            .addComponent(jLabel4)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(experienciaT))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -606,7 +604,6 @@ public class GUI extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -621,6 +618,7 @@ public class GUI extends javax.swing.JFrame {
                         .addGap(122, 122, 122)
                         .addComponent(nJugador3)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -673,14 +671,13 @@ public class GUI extends javax.swing.JFrame {
         jLabel20.setForeground(new java.awt.Color(102, 0, 51));
         jLabel20.setText("Tablero Juego Zombies");
 
-        Habilidades.setBackground(new java.awt.Color(153, 51, 0));
-        Habilidades.setFont(new java.awt.Font("Footlight MT Light", 3, 14)); // NOI18N
-        Habilidades.setForeground(new java.awt.Color(255, 0, 204));
-        Habilidades.setText("Habilidades de Jugadores");
-        Habilidades.setActionCommand("Habilidades de Jugadores");
-        Habilidades.addActionListener(new java.awt.event.ActionListener() {
+        jButton3.setBackground(new java.awt.Color(153, 51, 0));
+        jButton3.setFont(new java.awt.Font("Footlight MT Light", 3, 14)); // NOI18N
+        jButton3.setText("Habilidades de Jugadores");
+        jButton3.setActionCommand("Habilidades de Jugadores");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                HabilidadesActionPerformed(evt);
+                jButton3ActionPerformed(evt);
             }
         });
 
@@ -692,7 +689,7 @@ public class GUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel20)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(Habilidades)
+                .addComponent(jButton3)
                 .addGap(94, 94, 94)
                 .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -705,7 +702,7 @@ public class GUI extends javax.swing.JFrame {
                     .addComponent(jLabel20)
                     .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButton4)
-                        .addComponent(Habilidades)))
+                        .addComponent(jButton3)))
                 .addContainerGap())
         );
 
@@ -768,9 +765,9 @@ public class GUI extends javax.swing.JFrame {
         botones.actionPerformed(evt);
     }//GEN-LAST:event_bAtacarS1ActionPerformed
 
-    private void HabilidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HabilidadesActionPerformed
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         botones.actionPerformed(evt);
-    }//GEN-LAST:event_HabilidadesActionPerformed
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     private void bMoverS1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_bMoverS1KeyPressed
     }//GEN-LAST:event_bMoverS1KeyPressed
@@ -784,7 +781,6 @@ public class GUI extends javax.swing.JFrame {
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Habilidades;
     public javax.swing.JPanel PanelTablero;
     public javax.swing.JLabel ataqueSai;
     public javax.swing.JLabel ataqueSog;
@@ -807,6 +803,7 @@ public class GUI extends javax.swing.JFrame {
     public javax.swing.JLabel experienciaS;
     public javax.swing.JLabel experienciaSa;
     public javax.swing.JLabel experienciaT;
+    private javax.swing.JButton jButton3;
     public javax.swing.JButton jButton4;
     public javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

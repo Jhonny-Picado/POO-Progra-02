@@ -15,9 +15,6 @@ public class Jugador extends Personaje{
     protected int nivel;
     protected int experiencia;
     protected String tipo;
-    protected boolean usoItem;
-    protected boolean usoMover;
-    protected boolean usoAtaque;
     protected boolean habilidad1;
     protected boolean habilidad2;
     protected boolean habilidad3;
@@ -31,8 +28,6 @@ public class Jugador extends Personaje{
         this.vida=(int)(Math.random()*50+20); 
         this.defensa=0; 
         this.usoItem=false;
-        this.usoAtaque=false;
-        this.usoMover=false;
         this.habilidad2=false;
         this.habilidad3=false;
         this.ataque=0;
@@ -117,23 +112,6 @@ public class Jugador extends Personaje{
         this.usoItem=condicion;
     }
     
-    public boolean getUsoMover(){
-        return this.usoMover;
-    }
-    
-    public void setUsoMover(boolean condicion){
-        this.usoMover=condicion;
-    }
-    
-    
-    public boolean getUsoAtaque(){
-        return this.usoAtaque;
-    }
-    
-    public void setUsoAtaque(boolean condicion){
-        this.usoAtaque=condicion;
-    }
-    
     public boolean AccionesJugador(){   
         return (this.usoItem==true && this.usoAtaque==true && this.usoMover==true);
     }
@@ -186,11 +164,4 @@ public class Jugador extends Personaje{
     public Arma getArmaActual(){
         return this.armaActual;
     }
-    
-    public void ResetearUsos(){
-        this.usoItem=false;
-        this.usoAtaque=false;
-        this.usoMover=false;
-    }
-
 }

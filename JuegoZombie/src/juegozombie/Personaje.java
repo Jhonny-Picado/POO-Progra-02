@@ -21,12 +21,17 @@ public class Personaje {
     protected int [] posicion;
     protected boolean muerto;
     protected String nombre;
+    protected boolean usoMover;
+    protected boolean usoAtaque;
+    protected boolean usoItem;
     List<Items> articulos = new ArrayList<>();      //Lista de items de cada personaje
 
     //Constructor de la clase
     public Personaje(){
         this.muerto=false;
         this.posicion=new int[2];
+        this.usoAtaque=false;
+        this.usoMover=false;
     }
     
     //Metodos getters y setters de los atributos
@@ -126,5 +131,29 @@ public class Personaje {
         }
         CortoAlcance cor =new CortoAlcance();
         this.articulos.add(cor);
+    }
+
+    public boolean getUsoMover(){
+        return this.usoMover;
+    }
+    
+    public void setUsoMover(boolean condicion){
+        this.usoMover=condicion;
+    }
+    
+    
+    public boolean getUsoAtaque(){
+        return this.usoAtaque;
+    }
+    
+    public void setUsoAtaque(boolean condicion){
+        this.usoAtaque=condicion;
+    }
+    
+    
+    public void ResetearUsos(){
+        this.usoItem=false;
+        this.usoAtaque=false;
+        this.usoMover=false;
     }
 }

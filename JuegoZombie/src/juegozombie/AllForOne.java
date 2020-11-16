@@ -18,5 +18,6 @@ public class AllForOne extends Enemigo  {
         this.vision=3;
         this.vida=50;
         this.alcance=3;
+        this.ataque=55;
     } 
 }

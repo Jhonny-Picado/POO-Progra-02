@@ -18,5 +18,6 @@ public class Thanos extends Enemigo{
         this.vida=20;
         this.vision=2;
         this.alcance=2;
+        this.ataque=30;
     }
 }

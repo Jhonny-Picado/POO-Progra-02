@@ -52,9 +52,6 @@ public class Enemigo extends Personaje{
     }
     
  
-    public void dejarItem(){
-    }
-    
     public int RetornaEnemigo(List<Enemigo> enemigos,int[]posicion){
         int j=0;
         int []ci;

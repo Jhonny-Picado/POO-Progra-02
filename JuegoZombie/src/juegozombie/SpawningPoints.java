@@ -9,15 +9,14 @@ package juegozombie;
  *
  * @author Jhonny Picado
  */
-public class Garou extends Enemigo{
-   
-    //Constructor del enemigo Garou
-    public Garou(){
-        super();
-        this.nombre="Garou";
-        this.vida=5;
-        this.vision=1;
-        this.alcance=1;
-        this.ataque=15;
+public class SpawningPoints {
+    int[] posicion;
+    
+    public SpawningPoints(int[]pos) {
+        this.posicion=pos;
+    }
+    
+    public int [] getPosicion(){
+        return this.posicion;
     }
 }
