@@ -11,6 +11,7 @@ package juegozombie;
  */
 public class Saitama extends Jugador{
     
+    //Constructor del jugador Saitama
     public Saitama(){
         super();
         this.nombre = "Saitama";
@@ -31,6 +32,7 @@ public class Saitama extends Jugador{
     //La primera habilidad se implemento en el controlador, porque no era necesario hacer un metodo
     
     
+    //Método que retorna el nombre de las habilidades del jugador Saitama
     public String[] Nombrehabs(){
         String[] nombres= new String[3];
         
@@ -39,9 +41,22 @@ public class Saitama extends Jugador{
         if (this.habilidad2)
             nombres [1]="Duplicar Experiencia";
         if (this.habilidad3)
-            nombres[2]="Esquivar";
+            nombres[2]="Vida sin límite";
         return nombres;
+    } 
+    
+    //Habilidad  3, suma vida si tiene 100
+    public void VidaInfinita(int incremento){
+        
+        if(this.getHabilidad3()){
+                vida+=incremento;
+            }
+        else{
+            vida+=incremento;
+            
+            if (vida>100)
+                vida=100;
+        }    
     }
-        
-        
+    
 }

@@ -24,8 +24,5 @@ public class Medalla extends Items{
         this.poder= (int)(Math.random()*12+5); 
         this.tipo="Medalla";
     }
- 
-    public String getCategoria(){
-        return this.categoria;
-    } 
+
 }

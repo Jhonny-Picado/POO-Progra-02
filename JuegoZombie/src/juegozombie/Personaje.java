@@ -14,16 +14,22 @@ import java.util.List;
  */
 public class Personaje {
     
-    //Atributos de la clase padre
+    //Atributos de la clase padre, stats
     protected int vida;
     protected int ataque;
     protected int defensa;
     protected int [] posicion;
+    protected int [] posAtaque;
     protected boolean muerto;
     protected String nombre;
+    
+    //Atributos sobre usos de acciones
     protected boolean usoMover;
     protected boolean usoAtaque;
     protected boolean usoItem;
+    protected boolean usoVision;
+    protected boolean usoEscucha;
+    
     List<Items> articulos = new ArrayList<>();      //Lista de items de cada personaje
 
     //Constructor de la clase
@@ -32,6 +38,7 @@ public class Personaje {
         this.posicion=new int[2];
         this.usoAtaque=false;
         this.usoMover=false;
+        this.usoEscucha=false;
     }
     
     //Metodos getters y setters de los atributos
@@ -63,21 +70,28 @@ public class Personaje {
         return this.muerto;
     }
     
-    //Metodo a usar para incrementar la vida, ya sea por una habilidad o un item
+    //Metodo a usar para incrementar la vida, ya sea por una habilidad o un item, de una, valida una de las habilidades del jugador tanjiro
     public void setVida(Personaje jugador,int incremento){
-        Tanjiro tan=(Tanjiro)jugador;
+        Tanjiro tan;
         
-        if (vida<100){
-            if ("Tanjiro".equals(jugador.getNombre()))
+        if("Saitama".equals(jugador.getNombre())){
+            Saitama sai= (Saitama)(jugador);
+            sai.VidaInfinita(incremento);
+        }
+        else if (vida<100){
+            if ("Tanjiro".equals(jugador.getNombre())){
+                tan=(Tanjiro)(jugador);
                 vida+=tan.DuplicarCuracion(incremento);
+            }
             else
-            vida+=incremento;
+                vida+=incremento;
             
             if (vida>100)
                 vida=100;
         }
     }
 
+    
     public void setDefensa(int valor){
         this.defensa=valor;
     }
@@ -109,7 +123,7 @@ public class Personaje {
         return this.articulos;
     }
     
-    ///Modifica la posicion del usuario en el tablero
+    //Modifica la posicion del usuario en el tablero
     public void setPosicion(int fila,int columna){
         this.posicion[0]=fila;
         this.posicion[1]=columna;
@@ -118,7 +132,7 @@ public class Personaje {
     //Metodo protegido que inicia los items de los jugadores
     protected void iniciarItems(){
     
-    //Le doy dos items de cada tipo a cada jugador
+    //Le doy dos items de cada tipo a cada jugador, al iniciar la partida
     for (int i=0; i<2; i++){
         Consumible con =new Consumible();
         this.articulos.add(con);
@@ -132,7 +146,9 @@ public class Personaje {
         CortoAlcance cor =new CortoAlcance();
         this.articulos.add(cor);
     }
-
+    
+    
+    //Metodos que retornan la condicion de los usos de acciones posibles
     public boolean getUsoMover(){
         return this.usoMover;
     }
@@ -149,11 +165,31 @@ public class Personaje {
     public void setUsoAtaque(boolean condicion){
         this.usoAtaque=condicion;
     }
+      
+    public void setUsoVision(boolean condicion){
+        this.usoVision=condicion;
+    }
     
+    public boolean getUsoVision(){
+        return this.usoVision;
+    }
     
+    public void setUsoEscucha(){
+        this.usoVision=true;
+    }
+    
+    public boolean getUsoEscucha(){
+        return this.usoEscucha;
+    }
+    
+    //Método encargado de resetear los valores de las acciones realizadas en cada ronda
     public void ResetearUsos(){
         this.usoItem=false;
         this.usoAtaque=false;
         this.usoMover=false;
+        this.usoVision=false;
+        this.usoEscucha=false;
+        int[]a={20,20};
+        this.posAtaque=a;
     }
 }

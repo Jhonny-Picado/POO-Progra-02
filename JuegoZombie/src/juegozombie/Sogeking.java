@@ -40,7 +40,8 @@ public class Sogeking extends Jugador{
         return numero;
     }      
 
-        public String[] Nombrehabs(){
+    //Metodo que retorna el nombre de las habilidades del jugador
+    public String[] Nombrehabs(){
         String[] nombres= new String[3];
         
         if (this.habilidad1)
@@ -51,5 +52,4 @@ public class Sogeking extends Jugador{
             nombres[2]="Revivir";
         return nombres;
     }
-
 }

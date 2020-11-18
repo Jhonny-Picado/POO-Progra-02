@@ -16,8 +16,8 @@ public class Garou extends Enemigo{
         super();
         this.nombre="Garou";
         this.vida=5;
-        this.vision=1;
-        this.alcance=1;
-        this.ataque=15;
+        this.vision=4;
+        this.escucha=3;
+        this.ataque=9;
     }
 }

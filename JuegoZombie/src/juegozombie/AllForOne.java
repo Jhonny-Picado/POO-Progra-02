@@ -15,9 +15,9 @@ public class AllForOne extends Enemigo  {
     public AllForOne(){
         super();
         this.nombre="AllForOne";
-        this.vision=3;
-        this.vida=50;
-        this.alcance=3;
-        this.ataque=55;
+        this.vision=2;
+        this.vida=35;
+        this.escucha=1;
+        this.ataque=21;
     } 
 }

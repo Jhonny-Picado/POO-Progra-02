@@ -37,14 +37,14 @@ public class ItemsT extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(0, 204, 204));
+        jPanel1.setBackground(new java.awt.Color(0, 153, 153));
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel1.setForeground(new java.awt.Color(0, 0, 0));
+        jPanel1.setForeground(new java.awt.Color(0, 153, 204));
 
         TablaItemsT.setAutoCreateRowSorter(true);
-        TablaItemsT.setBackground(new java.awt.Color(51, 0, 51));
+        TablaItemsT.setBackground(new java.awt.Color(255, 102, 204));
         TablaItemsT.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        TablaItemsT.setForeground(new java.awt.Color(204, 0, 255));
+        TablaItemsT.setForeground(new java.awt.Color(0, 0, 0));
         TablaItemsT.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -62,16 +62,18 @@ public class ItemsT extends javax.swing.JFrame {
             }
         });
         TablaItemsT.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        TablaItemsT.setSelectionBackground(new java.awt.Color(0, 0, 51));
+        TablaItemsT.setSelectionBackground(new java.awt.Color(0, 0, 0));
+        TablaItemsT.setSelectionForeground(new java.awt.Color(153, 51, 0));
         jScrollPane1.setViewportView(TablaItemsT);
 
-        jLabel3.setFont(new java.awt.Font("Franklin Gothic Demi", 3, 24)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(204, 102, 0));
+        jLabel3.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel3.setFont(new java.awt.Font("Eras Demi ITC", 2, 24)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 51));
         jLabel3.setText("Items Tanjiro");
 
-        botonit.setBackground(new java.awt.Color(0, 153, 153));
-        botonit.setFont(new java.awt.Font("Dubai Medium", 3, 18)); // NOI18N
-        botonit.setForeground(new java.awt.Color(0, 0, 153));
+        botonit.setBackground(new java.awt.Color(0, 0, 0));
+        botonit.setFont(new java.awt.Font("Franklin Gothic Demi", 2, 24)); // NOI18N
+        botonit.setForeground(new java.awt.Color(102, 102, 255));
         botonit.setText("Utilizar Item");
         botonit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -84,13 +86,15 @@ public class ItemsT extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(82, 82, 82))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(121, 121, 121)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(botonit))
+                .addGap(91, 91, 91)
+                .addComponent(botonit)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -98,7 +102,7 @@ public class ItemsT extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(botonit)
                 .addContainerGap())

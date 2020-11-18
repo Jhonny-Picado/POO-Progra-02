@@ -39,10 +39,10 @@ public class ItemsSai extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(0, 204, 204));
+        jPanel1.setBackground(new java.awt.Color(0, 153, 153));
         jPanel1.setForeground(new java.awt.Color(0, 153, 204));
 
-        TablaItemsSai.setBackground(new java.awt.Color(0, 204, 153));
+        TablaItemsSai.setBackground(new java.awt.Color(255, 102, 204));
         TablaItemsSai.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         TablaItemsSai.setForeground(new java.awt.Color(0, 0, 0));
         TablaItemsSai.setModel(new javax.swing.table.DefaultTableModel(
@@ -61,11 +61,13 @@ public class ItemsSai extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        TablaItemsSai.setSelectionBackground(new java.awt.Color(0, 0, 0));
+        TablaItemsSai.setSelectionForeground(new java.awt.Color(153, 51, 0));
         jScrollPane1.setViewportView(TablaItemsSai);
 
-        jButton1.setBackground(new java.awt.Color(0, 153, 204));
+        jButton1.setBackground(new java.awt.Color(0, 0, 0));
         jButton1.setFont(new java.awt.Font("Franklin Gothic Demi", 2, 24)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(51, 0, 0));
+        jButton1.setForeground(new java.awt.Color(102, 102, 255));
         jButton1.setText("Utilizar Item");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -73,8 +75,9 @@ public class ItemsSai extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setBackground(new java.awt.Color(0, 0, 0));
         jLabel1.setFont(new java.awt.Font("Eras Demi ITC", 2, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(51, 0, 0));
+        jLabel1.setForeground(new java.awt.Color(0, 0, 51));
         jLabel1.setText("Items Saitama");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);

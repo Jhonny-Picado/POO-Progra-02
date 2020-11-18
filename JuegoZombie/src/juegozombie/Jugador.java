@@ -20,12 +20,12 @@ public class Jugador extends Personaje{
     protected boolean habilidad3;
     protected Arma armaActual;
     
-    //Constructor
+    //Constructor de la clase
     public Jugador(){        
         super();
         this.nivel=1;
         this.experiencia=0;
-        this.vida=(int)(Math.random()*50+20); 
+        this.vida=100; 
         this.defensa=0; 
         this.usoItem=false;
         this.habilidad2=false;
@@ -33,7 +33,7 @@ public class Jugador extends Personaje{
         this.ataque=0;
     }
     
-    //Metodo utilizado para subir el nivel del jugador
+    //Metodo utilizado para subir el nivel del jugador, cada 30 de exp se sube de nivel
     public void SubirNivel(){
         if (experiencia>=30){
             this.nivel+=1;
@@ -52,9 +52,9 @@ public class Jugador extends Personaje{
                     setHabilidad3();
                     break;
             }   
-        }
-        
+        } 
     }
+    
     
     //Metodo utilizado para usar un item
     public void UsarItem(Jugador jugador, int index){
@@ -78,7 +78,7 @@ public class Jugador extends Personaje{
         this.articulos.remove(index);
     }
     
-    //Getters y setter setters de los artibutos de los jugadores
+    //Getters y setter setters de los artibutos de los jugadores, valida de una una habilidad del jugador saitama
     public void setExperiencia(int valor){
        
         if ("Saitama".equals(this.getNombre())){
@@ -90,6 +90,7 @@ public class Jugador extends Personaje{
         
         this.SubirNivel();
     }
+    
     
     public String getEspecialidad(){
         return this.tipo;
@@ -116,6 +117,7 @@ public class Jugador extends Personaje{
         return (this.usoItem==true && this.usoAtaque==true && this.usoMover==true);
     }
     
+    //Metodo que modifican o muestran las habilidades de los jugadores(true or false)
     public void setHabilidad1(){
         if (!habilidad1){
             this.habilidad1=true;
@@ -136,32 +138,30 @@ public class Jugador extends Personaje{
             this.experiencia-=experiencia;
         }
     }
+    
     public boolean getHabilidad1(){
         return this.habilidad1;
     }
+    
     public boolean getHabilidad3(){
         return this.habilidad3;
     }
 
-/*
-    public void AgregarItem(Jugador jugador, DefaultTableModel tabla){
-        Consumible con = new Consumible();
-        Tanjiro user=new Tanjiro();
-        
-        if (jugador.getItems().size()<8){    
-            jugador.AgregarItem(con);
-            AñadirRow(con, tabla);
-           }
-        else if("Tanjiro".equals(jugador.getNombre()))
-            user=(Tanjiro)(jugador);
-            user.MasCapacidad(con);
-        }
-        else{
-            JOptionPane.showMessageDialog(vista, "El personaje no tiene la habilidad de poseer más items");
-        }
-    }*/
-    
+    //Alamcena la arma que esta en uso
     public Arma getArmaActual(){
         return this.armaActual;
+    }
+    
+    //Este atributo es para ver la posicion de ataque que hubo
+    public void setPosAtaque(int[] pos){
+        this.posAtaque=pos;
+    }
+    
+    public int[] getPosAtaque(){
+        return this.posAtaque;
+    }
+    
+    public void setMuerto(boolean condicion){
+        this.muerto=condicion;
     }
 }

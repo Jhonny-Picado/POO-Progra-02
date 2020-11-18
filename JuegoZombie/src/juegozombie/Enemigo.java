@@ -7,51 +7,50 @@ package juegozombie;
 
 import java.util.List;
 /**
- *
+* Clase padre de todos los enemigos del juego
  * @author Jhonny Picado
  */
 public class Enemigo extends Personaje{
     
     //Atributos de la clase
     protected int vision;
-    protected int alcance;
+    protected int escucha;
     
-    
-    //Constructor
+    //Constructor 
     public Enemigo(){        
         super();
         darItem();
-    }
-
-    
-    public void escuchar(){
+        usoVision=false;
     }
     
+    //Método que brinda un item para cade enemigo, envia un random para ver si darle item y otro para ver de que tipo le da
     public void darItem(){
         int si= (int)(Math.random()*2+1);  
         
         if (si==1){
-            si= (int)(Math.random()*4+1);  
+            si=(int)(Math.random()*6+0);  
                 switch(si){
-                case 1:
-                    this.articulos.add(new Arma());
-                    break;
-                case 2:
+                case 0:
                     this.articulos.add(new Consumible());
                     break;
-                case 3:
+                case 1:
                     this.articulos.add(new Escudo());
                     break;
-                case 4:
+                case 2:
                     this.articulos.add(new Medalla());
                     break;
+                case 3:
+                    this.articulos.add(new LargoAlcance());
+                    break;
                 default:
+                    this.articulos.add(new CortoAlcance());
                     break;
             }
         }
     }
     
- 
+    
+    //Método que retorna la posicion donde se encuentra el enemigo
     public int RetornaEnemigo(List<Enemigo> enemigos,int[]posicion){
         int j=0;
         int []ci;
@@ -66,6 +65,14 @@ public class Enemigo extends Personaje{
     }
     
     
+    //Método que retorna la visión del enemigo
+    public int getVisison(){
+        return this.vision;
+    }
     
+    //Metodo que retorna el alcance de escucha de cada enemigo
+    public int getEscucha(){
+        return this.escucha;
+    }
 }
 

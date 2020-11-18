@@ -11,13 +11,13 @@ package juegozombie;
  */
 public class Thanos extends Enemigo{
     
-    //constructor de Thanos
+    //constructor de Enemigo Thanos
     public Thanos(){
         super();
         this.nombre="Thanos";
-        this.vida=20;
-        this.vision=2;
-        this.alcance=2;
-        this.ataque=30;
+        this.vida=15;
+        this.vision=3;
+        this.escucha=2;
+        this.ataque=40;
     }
 }

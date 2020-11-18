@@ -10,10 +10,11 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Usuario
+ * @author Jhonny Picado
  */
 public class Tanjiro extends Jugador{
     
+    //Constructor del jugador Tanjiro
     public Tanjiro(){
         super();
         this.nombre="Tanjiro";
@@ -41,11 +42,10 @@ public class Tanjiro extends Jugador{
         }
         return numero;
     }  
-    
-    
+        
     //Para la tercera habilidad de este personaje no es necesario hacer un metodo
-    
-    
+
+    //Método que retorna los nombres de habilidades del personaje
     public String[] Nombrehabs(){
         String[] nombres= new String[3];
         
@@ -57,6 +57,4 @@ public class Tanjiro extends Jugador{
             nombres[2]="Ocultarse en obstáculos";
         return nombres;
     }
-    
-    
 }
